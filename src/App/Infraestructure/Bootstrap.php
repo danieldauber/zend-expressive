@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure;
+namespace App\Infraestructure;
 
 use App\Service\BootstrapInterface;
 
