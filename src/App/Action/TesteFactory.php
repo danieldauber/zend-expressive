@@ -10,11 +10,11 @@ class TesteFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $router   = $container->get(RouterInterface::class);
+
         $template = ($container->has(TemplateRendererInterface::class))
             ? $container->get(TemplateRendererInterface::class)
             : null;
 
-        return new Teste($router, $template);
+        return new Teste($container->get('Doctrine\ORM\EntityManager'), $template);
     }
 }
