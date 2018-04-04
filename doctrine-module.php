@@ -12,7 +12,5 @@ $container = require 'config/container.php';
 $app = $container->get(\Zend\Expressive\Application::class);
 
 $cli = $app->getContainer()->get('doctrine.cli');
-\Doctrine\Common\Annotations\AnnotationRegistry::registerLoader(function($className){
-  return class_exists($className);
-});
+require __DIR__ . '/src/App/Infraestructure/config/doctrine.php';
 exit($cli->run());
