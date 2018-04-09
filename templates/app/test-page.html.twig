@@ -1,0 +1,21 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}Teste{% endblock %}
+
+{% block content %}
+<H1>olar</H1>
+
+    {% for client in clients %}
+        Nome: {{ client.client.name }}<br />
+        Email: {{ client.client.email }}<br />
+        CPF: {{ client.client.cpf }}<br /><br />
+
+        Endereço: <br />
+        Logradouro: {{ client.logradouro }}<br />
+        Cidade: {{ client.cidade }}<br />
+        Estado: {{ client.estado }}<br />
+        CE: {{ client.cep }}
+
+        <br /><br /><br /><br />
+    {% endfor %}
+{% endblock %}

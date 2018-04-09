@@ -81,5 +81,4 @@ $doctrineOrmModuleConfig = require_once $vendorPath . '/doctrine/doctrine-orm-mo
 $doctrineOrmModuleConfig['dependencies'] = $doctrineOrmModuleConfig['service_manager'];
 unset($doctrineOrmModuleConfig['service_manager']);
 
-
 return ArrayUtils::merge($doctrineModuleConfig, $doctrineOrmModuleConfig);
