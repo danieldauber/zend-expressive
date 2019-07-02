@@ -1,5 +1,8 @@
 <?php
 
+use Zend\View;
+use \CodeEmailMKT\Infrastructure;
+
 $forms = [
     'dependencies' => [
         'aliases' => [
@@ -9,8 +12,8 @@ $forms = [
 
         ],
         'factories' => [
-            \Zend\View\HelperPluginManager::class =>
-                \CodeEmailMKT\Infrastructure\View\HelperPluginManagerFactory::class,
+            View\HelperPluginManager::class =>
+                Infrastructure\View\HelperPluginManagerFactory::class,
 
         ]
     ],
