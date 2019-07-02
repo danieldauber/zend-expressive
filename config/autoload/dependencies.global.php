@@ -1,4 +1,7 @@
 <?php
+
+use CodeEmailMKT\Domain\Service\FlashMessageInterface;
+use CodeEmailMKT\Infrastructure\Service\FlashMessageFactory;
 use Zend\Expressive\Application;
 use Zend\Expressive\Container\ApplicationFactory;
 use Zend\Expressive\Helper;
@@ -22,6 +25,8 @@ return [
             Application::class => ApplicationFactory::class,
             Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
             CustomerRepositoryInterface::class => CustomerRepositoryFactory::class,
+            \Aura\Session\Session::class => \DaMess\Factory\AuraSessionFactory::class,
+            FlashMessageInterface::class => FlashMessageFactory::class,
         ],
         'aliases' => [
             'configuration' => 'config', //Doctrine needs a service called Configuration

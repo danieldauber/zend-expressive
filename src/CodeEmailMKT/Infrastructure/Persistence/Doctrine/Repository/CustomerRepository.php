@@ -4,6 +4,7 @@ namespace CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository;
 
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\UnitOfWork;
 
 class CustomerRepository extends EntityRepository implements CustomerRepositoryInterface
 {
@@ -26,7 +27,12 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
      */
     public function update($entity)
     {
-        // TODO: Implement update() method.
+        if($this->getEntityManager()->getUnitOfWork()->getEntityState($entity) != UnitOfWork::STATE_MANAGED) {
+            $this->getEntityManager()->merge($entity);
+        }
+
+        $this->getEntityManager()->flush();
+        return $entity;
     }
 
     /**
@@ -35,12 +41,14 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
      */
     public function remove($entity)
     {
-        // TODO: Implement remove() method.
+        $this->getEntityManager()->remove($entity);
+        $this->getEntityManager()->flush();
     }
 
-    public function find($id)
+
+    public function find($id, $lockMode = null, $lockVersion = null)
     {
-        // TODO: Implement find() method.
+        return parent::find($id);
     }
 
     public function findAll()
