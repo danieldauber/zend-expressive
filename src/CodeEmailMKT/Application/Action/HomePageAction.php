@@ -43,7 +43,7 @@ class HomePageAction
             $data['templateName'] = 'Plates';
             $data['templateDocs'] = 'http://platesphp.com/';
         } elseif ($this->template instanceof TwigRenderer) {
-            $data['templateName'] = 'Twig';
+            $data['templateName'] = 'View';
             $data['templateDocs'] = 'http://twig.sensiolabs.org/documentation';
         } elseif ($this->template instanceof ZendViewRenderer) {
             $data['templateName'] = 'Zend View';

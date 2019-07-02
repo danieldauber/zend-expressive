@@ -2,8 +2,7 @@
 use Zend\Expressive\Container\ApplicationFactory;
 use Zend\Expressive\Helper;
 
-use CodeEmailMKT\Application\Middleware\BootstrapMiddleware;
-use CodeEmailMKT\Application\Middleware\BootstrapMiddlewareFactory;
+use CodeEmailMKT\Application\Middleware;
 
 
 return [
@@ -11,7 +10,8 @@ return [
         'factories' => [
             Helper\ServerUrlMiddleware::class => Helper\ServerUrlMiddlewareFactory::class,
             Helper\UrlHelperMiddleware::class => Helper\UrlHelperMiddlewareFactory::class,
-            BootstrapMiddleware::class => BootstrapMiddlewareFactory::class,
+            Middleware\BootstrapMiddleware::class => Middleware\BootstrapMiddlewareFactory::class,
+            Middleware\TwigMiddleware::class => Middleware\TwigMiddlewareFactory::class
 
         ],
     ],
@@ -46,7 +46,8 @@ return [
                 // - pre-conditions
                 // - modifications to outgoing responses
                 Helper\ServerUrlMiddleware::class,
-                BootstrapMiddleware::class,
+                Middleware\BootstrapMiddleware::class,
+                Middleware\TwigMiddleware::class
             ],
             'priority' => 10000,
         ],

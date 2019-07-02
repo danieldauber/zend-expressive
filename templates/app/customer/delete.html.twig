@@ -14,8 +14,9 @@
         <div class="col-md-8">
             <div class="box box-danger">
                 <div class="box-body">
-                    <form name="form_disabled" role="form" method="post"
+                    <form name="form" role="form" method="post"
                           action="{{ url('customer.delete', {id: customer.id}) }}">
+                        <input type="hidden" name="_method" value="DELETE">
                         <fieldset disabled>
                             <div class="box-body">
                                 <div class="form-group">

@@ -16,6 +16,7 @@
                 <div class="box-body">
                     <form name="form" role="form" method="post"
                           action="{{ url('customer.update', {id: customer.id}) }}">
+                        <input type="hidden" name="_method" value="PUT">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="name">Nome:</label>
