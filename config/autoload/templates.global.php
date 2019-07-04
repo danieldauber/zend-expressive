@@ -9,7 +9,7 @@ return [
             Zend\Expressive\Template\TemplateRendererInterface::class =>
                 \CodeEmailMKT\Infrastructure\View\Twig\TwigRendererFactory::class,
 
-            Twig_Environment::class => Zend\Expressive\Twig\TwigEnvironmentFactory::class,
+            //Twig_Environment::class => Zend\Expressive\Twig\TwigEnvironmentFactory::class,
         ],
     ],
 
