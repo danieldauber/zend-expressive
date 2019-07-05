@@ -2,6 +2,7 @@
 
 namespace CodeEmailMKT\Application\Action\Customer;
 
+use CodeEmailMKT\Application\Form\CustomerForm;
 use CodeEmailMKT\Domain\Entity\Customer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -27,8 +28,10 @@ class CustomerUpdatePageAction
 
         $id = $request->getAttribute('id');
         $entity = $this->repository->find($id);
+        $form = new CustomerForm();
+        $form->bind($entity);
 
-        if($request->getMethod() == 'PUT'){
+        if ($request->getMethod() == 'PUT') {
             $data = $request->getParsedBody();
 
             $entity->setName($data['name']);
@@ -43,8 +46,8 @@ class CustomerUpdatePageAction
 
         }
 
-        return new HtmlResponse($this->template->render('app::customer/update',[
-            'customer' => $entity
+        return new HtmlResponse($this->template->render('app::customer/update', [
+            'form' => $form
         ]));
     }
 }

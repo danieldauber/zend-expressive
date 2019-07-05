@@ -14,8 +14,10 @@ class CustomerListPageAction
 
     private $repository;
 
-    public function __construct(CustomerRepositoryInterface $repository, Template\TemplateRendererInterface $template = null)
-    {
+    public function __construct(
+        CustomerRepositoryInterface $repository,
+        Template\TemplateRendererInterface $template = null
+    ) {
         $this->repository  = $repository;
         $this->template = $template;
     }
