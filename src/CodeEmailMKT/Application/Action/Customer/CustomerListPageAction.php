@@ -5,6 +5,7 @@ namespace CodeEmailMKT\Application\Action\Customer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 
@@ -13,13 +14,19 @@ class CustomerListPageAction
     private $template;
 
     private $repository;
+    /**
+     * @var RouterInterface
+     */
+    private $router;
 
     public function __construct(
         CustomerRepositoryInterface $repository,
-        Template\TemplateRendererInterface $template = null
+        Template\TemplateRendererInterface $template,
+        RouterInterface $router
     ) {
         $this->repository  = $repository;
         $this->template = $template;
+        $this->router = $router;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
