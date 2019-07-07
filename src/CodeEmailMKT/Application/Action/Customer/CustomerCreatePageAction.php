@@ -21,15 +21,21 @@ class CustomerCreatePageAction
      * @var RouterInterface
      */
     private $router;
+    /**
+     * @var CustomerForm
+     */
+    private $form;
 
     public function __construct(
         CustomerRepositoryInterface $repository,
         Template\TemplateRendererInterface $template,
-        RouterInterface $router
+        RouterInterface $router,
+        CustomerForm $form
     ) {
         $this->repository  = $repository;
         $this->template = $template;
         $this->router = $router;
+        $this->form = $form;
     }
 
     public function __invoke(
@@ -38,14 +44,12 @@ class CustomerCreatePageAction
         callable $next = null
     ) {
 
-        $form = new CustomerForm();
-
         if ($request->getMethod() == 'POST') {
             $flash = $request->getAttribute('flash');
             $data = $request->getParsedBody();
-            $form->setData($data);
-            if ($form->isValid()) {
-                $entity = $form->getData();
+            $this->form->setData($data);
+            if ($this->form->isValid()) {
+                $entity = $this->form->getData();
                 $this->repository->create($entity);
 
                 $flash->setMessage('success', 'Contato cadastrado com sucesso');
@@ -56,7 +60,7 @@ class CustomerCreatePageAction
         }
 
         return new HtmlResponse($this->template->render('app::customer/create', [
-            'form' => $form,
+            'form' => $this->form,
         ]));
     }
 }

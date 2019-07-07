@@ -2,6 +2,7 @@
 
 use Zend\View;
 use \CodeEmailMKT\Infrastructure;
+use CodeEmailMKT\Application\Form;
 
 $forms = [
     'dependencies' => [
@@ -14,6 +15,7 @@ $forms = [
         'factories' => [
             View\HelperPluginManager::class =>
                 Infrastructure\View\HelperPluginManagerFactory::class,
+            Form\CustomerForm::class => Form\Factory\CustomerFormFactory::class
 
         ]
     ],

@@ -2,6 +2,7 @@
 
 namespace CodeEmailMKT\Application\Form;
 
+use CodeEmailMKT\Application\InputFilter\CustomerInputFilter;
 use CodeEmailMKT\Domain\Entity\Customer;
 use Zend\Form\Form;
 use Zend\Form\Element;
@@ -12,8 +13,6 @@ class CustomerForm extends Form
     public function __construct($name = 'customer', array $options = [])
     {
         parent::__construct($name, $options);
-        $this->setHydrator(new ClassMethods());
-        $this->setObject(new Customer());
 
         $this->add([
             'name' => 'id',
@@ -33,12 +32,13 @@ class CustomerForm extends Form
 
         $this->add([
             'name' => 'email',
-            'type' => Element\Email::class,
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'E-mail'
             ],
             'attributes' => [
-                'id' =>  'email'
+                'id' =>  'email',
+                'type' => 'email'
             ]
         ]);
 
