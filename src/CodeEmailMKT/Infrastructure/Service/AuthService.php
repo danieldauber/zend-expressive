@@ -42,6 +42,6 @@ class AuthService implements AuthInterface
 
     public function destroy()
     {
-        // TODO: Implement destroy() method.
+        $this->authenticationService->clearIdentity();
     }
 }

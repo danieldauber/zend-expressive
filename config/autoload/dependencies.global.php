@@ -28,7 +28,6 @@ return [
             Application::class => ApplicationFactory::class,
             Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
             CustomerRepositoryInterface::class => CustomerRepositoryFactory::class,
-            \Aura\Session\Session::class => \DaMess\Factory\AuraSessionFactory::class,
             FlashMessageInterface::class => FlashMessageFactory::class,
             'doctrine:fixtures_cmd:load'   => \CodeEdu\FixtureFactory::class,
             AuthService::class => AuthServiceFactory::class

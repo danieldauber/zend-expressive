@@ -13,6 +13,7 @@ return [
             CodeEmailMKT\Application\Action\HomePageAction::class =>
                 CodeEmailMKT\Application\Action\HomePageFactory::class,
             Login\LoginPageAction::class => Login\LoginPageFactory::class,
+            Login\LogoutAction::class => Login\LogoutFactory::class,
             Customer\CustomerListPageAction::class => Customer\Factory\CustomerListPageFactory::class,
             Customer\CustomerCreatePageAction::class => Customer\Factory\CustomerCreatePageFactory::class,
             Customer\CustomerUpdatePageAction::class => Customer\Factory\CustomerUpdatePageFactory::class,
@@ -39,6 +40,12 @@ return [
             'path' => '/auth/login',
             'middleware' => CodeEmailMKT\Application\Action\Login\LoginPageAction::class,
             'allowed_methods' => ['GET', 'POST'],
+        ],
+        [
+            'name' => 'auth.logout',
+            'path' => '/auth/logout',
+            'middleware' => CodeEmailMKT\Application\Action\Login\LogoutAction::class,
+            'allowed_methods' => ['GET'],
         ],
         [
             'name' => 'customer.list',

@@ -16,15 +16,9 @@ use Zend\Expressive\Plates\PlatesRenderer;
 use Zend\Expressive\Twig\TwigRenderer;
 use Zend\Expressive\ZendView\ZendViewRenderer;
 
-class LoginPageAction
+class LogoutAction
 {
     private $router;
-
-    private $template;
-    /**
-     * @var LoginForm
-     */
-    private $form;
     /**
      * @var AuthService
      */
@@ -32,13 +26,9 @@ class LoginPageAction
 
     public function __construct(
         Router\RouterInterface $router,
-        Template\TemplateRendererInterface $template,
-        LoginForm $form,
         AuthInterface $authService
     ) {
         $this->router   = $router;
-        $this->template = $template;
-        $this->form = $form;
         $this->authService = $authService;
     }
 
@@ -48,26 +38,9 @@ class LoginPageAction
         callable $next = null
     ) {
 
-        $renderParams = [
-          'form' => $this->form
-        ];
+        $this->authService->destroy();
 
-        if ($request->getMethod() == 'POST') {
-            $data = $request->getParsedBody();
-            $this->form->setData($data);
-
-            if ($this->form->isValid()) {
-                $user = $this->form->getData();
-
-                if ($this->authService->authenticate($user['email'], $user['password'])) {
-                    $uri = $this->router->generateUri('customer.list');
-                    return new RedirectResponse($uri);
-                }
-                $renderParams['message'] = 'Login ou senha inválido';
-                $renderParams['messageType'] = 'error';
-            }
-        }
-
-        return new HtmlResponse($this->template->render('app::login/login', $renderParams));
+        $uri = $this->router->generateUri('auth.login');
+        return new RedirectResponse($uri);
     }
 }
