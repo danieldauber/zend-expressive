@@ -13,6 +13,8 @@ class User
 
     private $password;
 
+    private $plainPassword;
+
     /**
      * @return mixed
      */
@@ -70,5 +72,25 @@ class User
         $this->password = $password;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
 
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    public function generatePassword()
+    {
+        $password = $this->getPlainPassword()?$this->getPlainPassword():uniqid();
+        $this->setPassword(password_hash($password, PASSWORD_BCRYPT));
+    }
 }
