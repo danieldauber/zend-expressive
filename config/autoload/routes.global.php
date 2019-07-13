@@ -1,6 +1,7 @@
 <?php
 
 use CodeEmailMKT\Application\Action\Customer;
+use CodeEmailMKT\Application\Action\Login;
 
 return [
     'dependencies' => [
@@ -9,7 +10,9 @@ return [
             CodeEmailMKT\Application\Action\PingAction::class => CodeEmailMKT\Application\Action\PingAction::class,
         ],
         'factories' => [
-            CodeEmailMKT\Application\Action\HomePageAction::class => CodeEmailMKT\Application\Action\HomePageFactory::class,
+            CodeEmailMKT\Application\Action\HomePageAction::class =>
+                CodeEmailMKT\Application\Action\HomePageFactory::class,
+            Login\LoginPageAction::class => Login\LoginPageFactory::class,
             Customer\CustomerListPageAction::class => Customer\Factory\CustomerListPageFactory::class,
             Customer\CustomerCreatePageAction::class => Customer\Factory\CustomerCreatePageFactory::class,
             Customer\CustomerUpdatePageAction::class => Customer\Factory\CustomerUpdatePageFactory::class,
@@ -30,6 +33,12 @@ return [
             'path' => '/api/ping',
             'middleware' => CodeEmailMKT\Application\Action\PingAction::class,
             'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'auth.login',
+            'path' => '/auth/login',
+            'middleware' => CodeEmailMKT\Application\Action\Login\LoginPageAction::class,
+            'allowed_methods' => ['GET', 'POST'],
         ],
         [
             'name' => 'customer.list',

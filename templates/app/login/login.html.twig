@@ -1,0 +1,37 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block page_header %}
+    Login
+{% endblock %}
+
+{% block content %}
+
+    {% include '@app/login/_form_elements.html.twig' %}
+
+    {% set submit = form.get('submit') %}
+    {% do submit.setAttribute('class', 'btn btn-primary').setLabel('Entrar') %}
+
+    {% do form.setAttribute('action', url('auth.login')) %}
+    {% do form.prepare() %}
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="box box-success">
+                <div class="box-body">
+                    {{ form().openTag(form) | raw }}
+                    {% include '@app/login/_form.html.twig' %}
+                    <div class="box-footer">
+                        {{ formButton(submit) }}
+                    </div>
+                    {{ form().closeTag() | raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

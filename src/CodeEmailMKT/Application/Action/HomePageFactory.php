@@ -15,6 +15,6 @@ class HomePageFactory
             ? $container->get(TemplateRendererInterface::class)
             : null;
 
-        return new HomePageAction($router, $template);
+        return new LoginPageAction($router, $template);
     }
 }

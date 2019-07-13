@@ -1,5 +1,8 @@
 <?php
 
+use CodeEmailMKT\Domain\Entity\User;
+use Doctrine\ORM\EntityManager;
+
 return [
     'doctrine' => [
         'connection' => [
@@ -27,6 +30,14 @@ return [
                 'drivers' => [
                     'CodeEmailMKT\Domain\Entity' => 'App_driver'
                 ]
+            ]
+        ],
+        'authentication' => [
+            'orm_default' => [
+                'object_manager' => EntityManager::class,
+                'identity_class' => User::class,
+                'identity_property' => 'email',
+                'credential_property' => 'password'
             ]
         ]
     ]
