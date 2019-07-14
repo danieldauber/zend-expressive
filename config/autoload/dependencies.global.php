@@ -1,5 +1,6 @@
 <?php
 
+use CodeEmailMKT\Domain\Service\AuthInterface;
 use CodeEmailMKT\Domain\Service\FlashMessageInterface;
 use CodeEmailMKT\Infrastructure\Service\AuthService;
 use CodeEmailMKT\Infrastructure\Service\AuthServiceFactory;
@@ -30,7 +31,7 @@ return [
             CustomerRepositoryInterface::class => CustomerRepositoryFactory::class,
             FlashMessageInterface::class => FlashMessageFactory::class,
             'doctrine:fixtures_cmd:load'   => \CodeEdu\FixtureFactory::class,
-            AuthService::class => AuthServiceFactory::class
+            AuthInterface::class => AuthServiceFactory::class
         ],
         'aliases' => [
             'Configuration' => 'config', //Doctrine needs a service called Configuration

@@ -2,6 +2,8 @@
 
 use CodeEmailMKT\Application\Action\Customer;
 use CodeEmailMKT\Application\Action\Login;
+use CodeEmailMKT\Application\Middleware\AuthenticationMiddleware;
+use CodeEmailMKT\Application\Middleware\AuthenticationMiddlewareFactory;
 
 return [
     'dependencies' => [
@@ -18,6 +20,7 @@ return [
             Customer\CustomerCreatePageAction::class => Customer\Factory\CustomerCreatePageFactory::class,
             Customer\CustomerUpdatePageAction::class => Customer\Factory\CustomerUpdatePageFactory::class,
             Customer\CustomerDeletePageAction::class => Customer\Factory\CustomerDeletePageFactory::class,
+            AuthenticationMiddleware::class => AuthenticationMiddlewareFactory::class
 
         ],
     ],

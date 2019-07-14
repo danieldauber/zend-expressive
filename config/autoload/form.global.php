@@ -28,6 +28,7 @@ $forms = [
 
         ],
         'factories' => [
+            'identity' => View\Helper\Service\IdentityFactory::class
 
         ]
     ]

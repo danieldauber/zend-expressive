@@ -1,4 +1,4 @@
-{% extends '@layout/default.html.twig' %}
+{% extends '@layout/auth.html.twig' %}
 
 {% block title %}
     Login
@@ -18,8 +18,8 @@
     {% do form.setAttribute('action', url('auth.login')) %}
     {% do form.prepare() %}
 
-    <div class="row">
-        <div class="col-md-5">
+    <div class="row ">
+        <div class="col-md-offset-2 col-md-8">
             <div class="box box-success">
                 <div class="box-body">
                     {{ form().openTag(form) | raw }}

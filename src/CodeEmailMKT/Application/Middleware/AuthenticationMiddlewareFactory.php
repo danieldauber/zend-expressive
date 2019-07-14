@@ -1,19 +1,17 @@
 <?php
 
-namespace CodeEmailMKT\Application\Action\Login;
+namespace CodeEmailMKT\Application\Middleware;
 
 use CodeEmailMKT\Domain\Service\AuthInterface;
-use CodeEmailMKT\Infrastructure\Service\AuthService;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Router\RouterInterface;
 
-class LogoutFactory
+class AuthenticationMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $router   = $container->get(RouterInterface::class);
+        $router = $container->get(RouterInterface::class);
         $authService = $container->get(AuthInterface::class);
-
-        return new LogoutAction($router, $authService);
+        return new AuthenticationMiddleware($router, $authService);
     }
 }

@@ -32,12 +32,12 @@ class AuthService implements AuthInterface
 
     public function isAuth()
     {
-        // TODO: Implement isAuth() method.
+        return $this->getUser() != null;
     }
 
     public function getUser()
     {
-        // TODO: Implement getUser() method.
+        return $this->authenticationService->getIdentity();
     }
 
     public function destroy()

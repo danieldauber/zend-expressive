@@ -1,4 +1,6 @@
 <?php
+
+use CodeEmailMKT\Application\Middleware\AuthenticationMiddleware;
 use Zend\Expressive\Container\ApplicationFactory;
 use Zend\Expressive\Helper;
 
@@ -50,6 +52,12 @@ return [
                 Middleware\TwigMiddleware::class
             ],
             'priority' => 10000,
+        ],
+        'admin' => [
+            'path' => '/admin',
+            'middleware' => [
+                AuthenticationMiddleware::class
+            ]
         ],
 
         'routing' => [
