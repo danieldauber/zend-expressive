@@ -1,5 +1,5 @@
 <?php
-
+declare (strict_types = 1);
 namespace CodeEmailMKT\Domain\Entity;
 
 class User
@@ -35,7 +35,7 @@ class User
     /**
      * @param mixed $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -51,7 +51,7 @@ class User
     /**
      * @param mixed $email
      */
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
     }
@@ -67,7 +67,7 @@ class User
     /**
      * @param mixed $password
      */
-    public function setPassword($password)
+    public function setPassword(string $password)
     {
         $this->password = $password;
     }
@@ -83,14 +83,14 @@ class User
     /**
      * @param mixed $plainPassword
      */
-    public function setPlainPassword($plainPassword)
+    public function setPlainPassword(string $plainPassword)
     {
         $this->plainPassword = $plainPassword;
     }
 
     public function generatePassword()
     {
-        $password = $this->getPlainPassword()?$this->getPlainPassword():uniqid();
+        $password = $this->getPlainPassword() ?? uniqid();
         $this->setPassword(password_hash($password, PASSWORD_BCRYPT));
     }
 }

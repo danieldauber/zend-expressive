@@ -1,10 +1,11 @@
 <?php
 
-namespace CodeEmailMKT\Application\Action\Customer;
+namespace CodeEmailMKT\Application\Action\Tag;
 
 use CodeEmailMKT\Application\Form\CustomerForm;
 use CodeEmailMKT\Application\Form\MethodElement;
 use CodeEmailMKT\Domain\Entity\Customer;
+use CodeEmailMKT\Domain\Persistence\TagRepositoryInterface;
 use CodeEmailMKT\Domain\Service\FlashMessageInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -14,7 +15,7 @@ use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 
-class CustomerDeletePageAction
+class TagDeletePageAction
 {
     private $template;
 
@@ -29,7 +30,7 @@ class CustomerDeletePageAction
     private $form;
 
     public function __construct(
-        CustomerRepositoryInterface $repository,
+        TagRepositoryInterface $repository,
         Template\TemplateRendererInterface $template,
         RouterInterface $router,
         CustomerForm $form
@@ -58,7 +59,7 @@ class CustomerDeletePageAction
             return new RedirectResponse($uri);
         }
 
-        return new HtmlResponse($this->template->render('app::customer/delete', [
+        return new HtmlResponse($this->template->render('app::tag/delete', [
             'form' => $this->form
         ]));
     }

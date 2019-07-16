@@ -2,16 +2,15 @@
 
 namespace CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository;
 
-use CodeEmailMKT\Domain\Entity\Customer;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 
-class CustomerRepositoryFactory
+class TagRepositoryFactory
 {
-    public function __invoke(ContainerInterface $container) : CustomerRepository
+    public function __invoke(ContainerInterface $container) : TagRepository
     {
         /** @var EntityManager $entityManager */
         $entityManager = $container->get(EntityManager::class);
-        return $entityManager->getRepository(Customer::class);
+        return $entityManager->getRepository(Tag::class);
     }
 }

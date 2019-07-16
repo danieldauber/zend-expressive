@@ -1,7 +1,35 @@
 <?php
 
-use CodeEmailMKT\Application\Action\Customer;
-use CodeEmailMKT\Application\Action\Login;
+use CodeEmailMKT\Application\Action\Customer\ {
+    CustomerCreatePageAction,
+    CustomerDeletePageAction,
+    CustomerListPageAction,
+    CustomerUpdatePageAction
+};
+use CodeEmailMKT\Application\Action\Customer\Factory\ {
+    CustomerListPageFactory,
+    CustomerUpdatePageFactory,
+    CustomerCreatePageFactory,
+    CustomerDeletePageFactory
+};
+use CodeEmailMKT\Application\Action\Login\ {
+    LoginPageAction,
+    LogoutAction,
+    LoginPageFactory,
+    LogoutFactory
+};
+use CodeEmailMKT\Application\Action\Tag\ {
+    TagCreatePageAction,
+    TagDeletePageAction,
+    TagListPageAction,
+    TagUpdatePageAction
+};
+use CodeEmailMKT\Application\Action\Tag\Factory\ {
+    TagListPageFactory,
+    TagUpdatePageFactory,
+    TagCreatePageFactory,
+    TagDeletePageFactory
+};
 use CodeEmailMKT\Application\Middleware\AuthenticationMiddleware;
 use CodeEmailMKT\Application\Middleware\AuthenticationMiddlewareFactory;
 
@@ -12,16 +40,17 @@ return [
             CodeEmailMKT\Application\Action\PingAction::class => CodeEmailMKT\Application\Action\PingAction::class,
         ],
         'factories' => [
-            CodeEmailMKT\Application\Action\HomePageAction::class =>
-                CodeEmailMKT\Application\Action\HomePageFactory::class,
-            Login\LoginPageAction::class => Login\LoginPageFactory::class,
-            Login\LogoutAction::class => Login\LogoutFactory::class,
-            Customer\CustomerListPageAction::class => Customer\Factory\CustomerListPageFactory::class,
-            Customer\CustomerCreatePageAction::class => Customer\Factory\CustomerCreatePageFactory::class,
-            Customer\CustomerUpdatePageAction::class => Customer\Factory\CustomerUpdatePageFactory::class,
-            Customer\CustomerDeletePageAction::class => Customer\Factory\CustomerDeletePageFactory::class,
-            AuthenticationMiddleware::class => AuthenticationMiddlewareFactory::class
-
+            LoginPageAction::class => LoginPageFactory::class,
+            LogoutAction::class => LogoutFactory::class,
+            AuthenticationMiddleware::class => AuthenticationMiddlewareFactory::class,
+            CustomerListPageAction::class => CustomerListPageFactory::class,
+            CustomerCreatePageAction::class => CustomerCreatePageFactory::class,
+            CustomerUpdatePageAction::class => CustomerUpdatePageFactory::class,
+            CustomerDeletePageAction::class => CustomerDeletePageFactory::class,
+            TagListPageAction::class => TagListPageFactory::class,
+            TagCreatePageAction::class => TagCreatePageFactory::class,
+            TagUpdatePageAction::class => TagUpdatePageFactory::class,
+            TagDeletePageAction::class => TagDeletePageFactory::class,
         ],
     ],
 
@@ -29,7 +58,7 @@ return [
         [
             'name' => 'home',
             'path' => '/',
-            'middleware' => CodeEmailMKT\Application\Action\HomePageAction::class,
+            'middleware' => CustomerListPageAction::class,
             'allowed_methods' => ['GET'],
         ],
         [
@@ -41,31 +70,31 @@ return [
         [
             'name' => 'auth.login',
             'path' => '/auth/login',
-            'middleware' => CodeEmailMKT\Application\Action\Login\LoginPageAction::class,
+            'middleware' => LoginPageAction::class,
             'allowed_methods' => ['GET', 'POST'],
         ],
         [
             'name' => 'auth.logout',
             'path' => '/auth/logout',
-            'middleware' => CodeEmailMKT\Application\Action\Login\LogoutAction::class,
+            'middleware' => LogoutAction::class,
             'allowed_methods' => ['GET'],
         ],
         [
             'name' => 'customer.list',
             'path' => '/admin/customers',
-            'middleware' => Customer\CustomerListPageAction::class,
+            'middleware' => CustomerListPageAction::class,
             'allowed_methods' => ['GET'],
         ],
         [
             'name' => 'customer.create',
             'path' => '/admin/customer/create',
-            'middleware' => Customer\CustomerCreatePageAction::class,
+            'middleware' => CustomerCreatePageAction::class,
             'allowed_methods' => ['GET','POST'],
         ],
         [
             'name' => 'customer.update',
             'path' => '/admin/customer/update/{id}',
-            'middleware' => Customer\CustomerUpdatePageAction::class,
+            'middleware' => CustomerUpdatePageAction::class,
             'allowed_methods' => ['GET','PUT'],
             'options' => [
                 'tokens' => [
@@ -76,7 +105,41 @@ return [
         [
             'name' => 'customer.delete',
             'path' => '/admin/customer/delete/{id}',
-            'middleware' => Customer\CustomerDeletePageAction::class,
+            'middleware' => CustomerDeletePageAction::class,
+            'allowed_methods' => ['GET','DELETE'],
+            'options' => [
+                'tokens' => [
+                    'id' => '\d+'
+                ]
+            ]
+        ],
+        [
+            'name' => 'tag.list',
+            'path' => '/admin/tags',
+            'middleware' => TagListPageAction::class,
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'tag.create',
+            'path' => '/admin/tag/create',
+            'middleware' => TagCreatePageAction::class,
+            'allowed_methods' => ['GET','POST'],
+        ],
+        [
+            'name' => 'tag.update',
+            'path' => '/admin/tag/update/{id}',
+            'middleware' => TagUpdatePageAction::class,
+            'allowed_methods' => ['GET','PUT'],
+            'options' => [
+                'tokens' => [
+                    'id' => '\d+'
+                ]
+            ]
+        ],
+        [
+            'name' => 'tag.delete',
+            'path' => '/admin/tag/delete/{id}',
+            'middleware' => TagDeletePageAction::class,
             'allowed_methods' => ['GET','DELETE'],
             'options' => [
                 'tokens' => [

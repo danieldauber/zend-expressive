@@ -1,0 +1,49 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}
+    Listagem de Tags
+{% endblock %}
+
+{% block page_header %}
+    Listagem de Tags
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="box">
+            <div class="box-header">
+                <a href="{{ url('tag.create') }}" class="btn btn-app">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i> Novo
+                </a>
+            </div>
+        </div>
+        
+        <div class="box">
+            <div class="box-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th class="col">#</th>
+                            <th>Nome</th>
+                            <th>Ações</th>
+                        </tr>
+                        {% for tag in tags %}
+                           <tr>
+                               <td>{{ tag.id }}</td>
+                               <td>{{ tag.name }}</td>
+                               <td>
+                                   <a href="{{ url('tag.update', {id: tag.id}) }}">Editar</a> |
+                                   <a href="{{ url('tag.delete', {id: tag.id}) }}">Excluir</a>
+                               </td>
+                           </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+

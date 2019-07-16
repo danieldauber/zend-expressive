@@ -23,15 +23,21 @@ class CustomerUpdatePageAction
      * @var RouterInterface
      */
     private $router;
+    /**
+     * @var CustomerForm
+     */
+    private $form;
 
     public function __construct(
         CustomerRepositoryInterface $repository,
         Template\TemplateRendererInterface $template,
-        RouterInterface $router
+        RouterInterface $router,
+        CustomerForm $form
     ) {
         $this->repository  = $repository;
         $this->template = $template;
         $this->router = $router;
+        $this->form = $form;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
@@ -39,16 +45,16 @@ class CustomerUpdatePageAction
 
         $id = $request->getAttribute('id');
         $entity = $this->repository->find($id);
-        $form = new CustomerForm();
-        $form->add(new MethodElement('PUT'));
-        $form->bind($entity);
+
+        $this->form->add(new MethodElement('PUT'));
+        $this->form->bind($entity);
 
         if ($request->getMethod() == 'PUT') {
             $flash = $request->getAttribute('flash');
             $data = $request->getParsedBody();
-            $form->setData($data);
-            if ($form->isValid()) {
-                $entity = $form->getData();
+            $this->form->setData($data);
+            if ($this->form->isValid()) {
+                $entity = $this->form->getData();
                 $this->repository->create($entity);
 
                 $flash->setMessage(FlashMessageInterface::MESSAGE_SUCCESS, 'Contato editado com sucesso');
@@ -58,7 +64,7 @@ class CustomerUpdatePageAction
             }
         }
         return new HtmlResponse($this->template->render('app::customer/update', [
-            'form' => $form
+            'form' => $this->form
         ]));
     }
 }

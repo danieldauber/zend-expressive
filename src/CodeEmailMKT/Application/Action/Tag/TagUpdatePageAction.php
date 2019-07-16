@@ -1,10 +1,11 @@
 <?php
 
-namespace CodeEmailMKT\Application\Action\Customer;
+namespace CodeEmailMKT\Application\Action\Tag;
 
 use CodeEmailMKT\Application\Form\CustomerForm;
 use CodeEmailMKT\Application\Form\MethodElement;
 use CodeEmailMKT\Domain\Entity\Customer;
+use CodeEmailMKT\Domain\Persistence\TagRepositoryInterface;
 use CodeEmailMKT\Domain\Service\FlashMessageInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -14,7 +15,7 @@ use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 
-class CustomerDeletePageAction
+class TagUpdatePageAction
 {
     private $template;
 
@@ -29,7 +30,7 @@ class CustomerDeletePageAction
     private $form;
 
     public function __construct(
-        CustomerRepositoryInterface $repository,
+        TagRepositoryInterface $repository,
         Template\TemplateRendererInterface $template,
         RouterInterface $router,
         CustomerForm $form
@@ -46,19 +47,24 @@ class CustomerDeletePageAction
         $id = $request->getAttribute('id');
         $entity = $this->repository->find($id);
 
-        $this->form->add(new MethodElement('DELETE'));
+        $this->form->add(new MethodElement('PUT'));
         $this->form->bind($entity);
 
-        if ($request->getMethod() == 'DELETE') {
+        if ($request->getMethod() == 'PUT') {
             $flash = $request->getAttribute('flash');
-            $this->repository->remove($entity);
-            $flash->setMessage(FlashMessageInterface::MESSAGE_SUCCESS, 'Contato removido com sucesso');
+            $data = $request->getParsedBody();
+            $this->form->setData($data);
+            if ($this->form->isValid()) {
+                $entity = $this->form->getData();
+                $this->repository->create($entity);
 
-            $uri = $this->router->generateUri('customer.list');
-            return new RedirectResponse($uri);
+                $flash->setMessage(FlashMessageInterface::MESSAGE_SUCCESS, 'Contato editado com sucesso');
+
+                $uri = $this->router->generateUri('customer.list');
+                return new RedirectResponse($uri);
+            }
         }
-
-        return new HtmlResponse($this->template->render('app::customer/delete', [
+        return new HtmlResponse($this->template->render('app::tag/update', [
             'form' => $this->form
         ]));
     }

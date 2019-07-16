@@ -16,4 +16,8 @@ CodeEmailMKT\Domain\Entity\Customer:
     email:
       type: string
       length: 200
+  manyToMany:
+    tags:
+      targetEntity: CodeEmailMKT\Domain\Entity\Tag
+      mappedBy: customers
 

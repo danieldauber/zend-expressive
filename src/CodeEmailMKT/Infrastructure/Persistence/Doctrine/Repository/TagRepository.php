@@ -2,12 +2,12 @@
 declare(strict_types = 1);
 namespace CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository;
 
-use CodeEmailMKT\Domain\Entity\Customer;
-use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
+use CodeEmailMKT\Domain\Entity\Tag;
+use CodeEmailMKT\Domain\Persistence\TagRepositoryInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\UnitOfWork;
 
-class CustomerRepository extends EntityRepository implements CustomerRepositoryInterface
+class TagRepository extends EntityRepository implements TagRepositoryInterface
 {
 
     /**
@@ -15,7 +15,7 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
      * @return  $entity
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function create($entity) : Customer
+    public function create($entity) : Tag
     {
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
@@ -28,7 +28,7 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
      * @return mixed
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function update($entity) : Customer
+    public function update($entity) : Tag
     {
         if ($this->getEntityManager()->getUnitOfWork()->getEntityState($entity) != UnitOfWork::STATE_MANAGED) {
             $this->getEntityManager()->merge($entity);
@@ -50,7 +50,7 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
     }
 
 
-    public function find($id, $lockMode = null, $lockVersion = null) : Customer
+    public function find($id, $lockMode = null, $lockVersion = null) : Tag
     {
         return parent::find($id);
     }
