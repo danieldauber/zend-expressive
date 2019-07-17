@@ -24,12 +24,7 @@ use CodeEmailMKT\Application\Action\Tag\ {
     TagListPageAction,
     TagUpdatePageAction
 };
-use CodeEmailMKT\Application\Action\Tag\Factory\ {
-    TagListPageFactory,
-    TagUpdatePageFactory,
-    TagCreatePageFactory,
-    TagDeletePageFactory
-};
+use CodeEmailMKT\Application\Action\Tag\Factory as Tag;
 use CodeEmailMKT\Application\Middleware\AuthenticationMiddleware;
 use CodeEmailMKT\Application\Middleware\AuthenticationMiddlewareFactory;
 
@@ -47,10 +42,10 @@ return [
             CustomerCreatePageAction::class => CustomerCreatePageFactory::class,
             CustomerUpdatePageAction::class => CustomerUpdatePageFactory::class,
             CustomerDeletePageAction::class => CustomerDeletePageFactory::class,
-            TagListPageAction::class => TagListPageFactory::class,
-            TagCreatePageAction::class => TagCreatePageFactory::class,
-            TagUpdatePageAction::class => TagUpdatePageFactory::class,
-            TagDeletePageAction::class => TagDeletePageFactory::class,
+            TagListPageAction::class => Tag\TagListPageFactory::class,
+            TagCreatePageAction::class => Tag\TagCreatePageFactory::class,
+            TagUpdatePageAction::class => Tag\TagUpdatePageFactory::class,
+            TagDeletePageAction::class => Tag\TagDeletePageFactory::class,
         ],
     ],
 

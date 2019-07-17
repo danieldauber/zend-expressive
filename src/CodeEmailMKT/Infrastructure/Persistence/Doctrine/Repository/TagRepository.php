@@ -15,7 +15,7 @@ class TagRepository extends EntityRepository implements TagRepositoryInterface
      * @return  $entity
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function create($entity) : Tag
+    public function create($entity)
     {
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
@@ -28,7 +28,7 @@ class TagRepository extends EntityRepository implements TagRepositoryInterface
      * @return mixed
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function update($entity) : Tag
+    public function update($entity)
     {
         if ($this->getEntityManager()->getUnitOfWork()->getEntityState($entity) != UnitOfWork::STATE_MANAGED) {
             $this->getEntityManager()->merge($entity);
@@ -50,7 +50,7 @@ class TagRepository extends EntityRepository implements TagRepositoryInterface
     }
 
 
-    public function find($id, $lockMode = null, $lockVersion = null) : Tag
+    public function find($id, $lockMode = null, $lockVersion = null)
     {
         return parent::find($id);
     }

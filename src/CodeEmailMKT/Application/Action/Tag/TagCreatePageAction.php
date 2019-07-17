@@ -3,7 +3,8 @@
 namespace CodeEmailMKT\Application\Action\Tag;
 
 use CodeEmailMKT\Application\Form\CustomerForm;
-use CodeEmailMKT\Domain\Entity\Customer;
+use CodeEmailMKT\Application\Form\TagForm;
+use CodeEmailMKT\Domain\Persistence\TagRepositoryInterface;
 use CodeEmailMKT\Domain\Service\FlashMessageInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -11,7 +12,6 @@ use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template;
-use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 
 class TagCreatePageAction
 {
@@ -28,10 +28,10 @@ class TagCreatePageAction
     private $form;
 
     public function __construct(
-        CustomerRepositoryInterface $repository,
+        TagRepositoryInterface $repository,
         Template\TemplateRendererInterface $template,
         RouterInterface $router,
-        CustomerForm $form
+        TagForm $form
     ) {
         $this->repository  = $repository;
         $this->template = $template;
@@ -53,9 +53,9 @@ class TagCreatePageAction
                 $entity = $this->form->getData();
                 $this->repository->create($entity);
 
-                $flash->setMessage(FlashMessageInterface::MESSAGE_SUCCESS, 'Contato cadastrado com sucesso');
+                $flash->setMessage(FlashMessageInterface::MESSAGE_SUCCESS, 'Tag cadastrada com sucesso');
 
-                $uri = $this->router->generateUri('customer.list');
+                $uri = $this->router->generateUri('tag.list');
                 return new RedirectResponse($uri);
             }
         }

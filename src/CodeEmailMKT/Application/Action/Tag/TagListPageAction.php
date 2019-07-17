@@ -22,12 +22,10 @@ class TagListPageAction
 
     public function __construct(
         TagRepositoryInterface $repository,
-        Template\TemplateRendererInterface $template,
-        RouterInterface $router
+        Template\TemplateRendererInterface $template
     ) {
         $this->repository  = $repository;
         $this->template = $template;
-        $this->router = $router;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)

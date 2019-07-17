@@ -5,19 +5,21 @@ namespace CodeEmailMKT\Application\Form\Factory;
 use CodeEmailMKT\Application\Form\CustomerForm;
 use CodeEmailMKT\Application\Form\TagForm;
 use CodeEmailMKT\Application\InputFilter\CustomerInputFilter;
+use CodeEmailMKT\Application\InputFilter\TagInputFilter;
 use CodeEmailMKT\Domain\Entity\Customer;
+use CodeEmailMKT\Domain\Entity\Tag;
 use Interop\Container\ContainerInterface;
 use Zend\Hydrator\ClassMethods;
 
 class TagFormFactory
 {
-    public function __invoke(ContainerInterface $container) : TagForm
+    public function __invoke(ContainerInterface $container)
     {
 
         $form = new TagForm();
         $form->setHydrator(new ClassMethods());
-        $form->setObject(new Customer());
-        $form->setInputFilter(new CustomerInputFilter());
+        $form->setObject(new Tag());
+        $form->setInputFilter(new TagInputFilter());
 
         return $form;
     }
