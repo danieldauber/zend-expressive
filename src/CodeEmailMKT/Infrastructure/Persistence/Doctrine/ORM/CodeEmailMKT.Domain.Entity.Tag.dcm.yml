@@ -16,3 +16,6 @@ CodeEmailMKT\Domain\Entity\Tag:
     customers:
       targetEntity: CodeEmailMKT\Domain\Entity\Customer
       inversedBy: tags
+    campaigns:
+      targetEntity: CodeEmailMKT\Domain\Entity\Campaign
+      inversedBy: tags

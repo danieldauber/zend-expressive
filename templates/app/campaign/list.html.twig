@@ -1,0 +1,49 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}
+    Listagem de Campanhas
+{% endblock %}
+
+{% block page_header %}
+    Listagem de Campanhas
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="box">
+            <div class="box-header">
+                <a href="{{ url('campaign.create') }}" class="btn btn-app">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i> Nova
+                </a>
+            </div>
+        </div>
+        
+        <div class="box">
+            <div class="box-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th class="col">#</th>
+                            <th>Nome</th>
+                            <th>Ações</th>
+                        </tr>
+                        {% for campaign in campaigns %}
+                           <tr>
+                               <td>{{ campaign.id }}</td>
+                               <td>{{ campaign.name }}</td>
+                               <td>
+                                   <a href="{{ url('campaign.update', {id: campaign.id}) }}">Editar</a> |
+                                   <a href="{{ url('campaign.delete', {id: campaign.id}) }}">Excluir</a>
+                               </td>
+                           </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+

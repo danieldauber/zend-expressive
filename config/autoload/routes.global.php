@@ -1,29 +1,23 @@
 <?php
 
+use CodeEmailMKT\Application\Action\Campaign\{
+    CampaignCreatePageAction,
+    CampaignDeletePageAction,
+    CampaignListPageAction,
+    CampaignUpdatePageAction
+};
 use CodeEmailMKT\Application\Action\Customer\ {
-    CustomerCreatePageAction,
-    CustomerDeletePageAction,
-    CustomerListPageAction,
-    CustomerUpdatePageAction
+    CustomerCreatePageAction, CustomerDeletePageAction, CustomerListPageAction, CustomerUpdatePageAction
 };
-use CodeEmailMKT\Application\Action\Customer\Factory\ {
-    CustomerListPageFactory,
-    CustomerUpdatePageFactory,
-    CustomerCreatePageFactory,
-    CustomerDeletePageFactory
-};
+
 use CodeEmailMKT\Application\Action\Login\ {
-    LoginPageAction,
-    LogoutAction,
-    LoginPageFactory,
-    LogoutFactory
+    LoginPageAction, LogoutAction, LoginPageFactory, LogoutFactory
 };
 use CodeEmailMKT\Application\Action\Tag\ {
-    TagCreatePageAction,
-    TagDeletePageAction,
-    TagListPageAction,
-    TagUpdatePageAction
+    TagCreatePageAction, TagDeletePageAction, TagListPageAction, TagUpdatePageAction
 };
+use CodeEmailMKT\Application\Action\Campaign\Factory as Campaign;
+use CodeEmailMKT\Application\Action\Customer\Factory as Customer;
 use CodeEmailMKT\Application\Action\Tag\Factory as Tag;
 use CodeEmailMKT\Application\Middleware\AuthenticationMiddleware;
 use CodeEmailMKT\Application\Middleware\AuthenticationMiddlewareFactory;
@@ -38,14 +32,18 @@ return [
             LoginPageAction::class => LoginPageFactory::class,
             LogoutAction::class => LogoutFactory::class,
             AuthenticationMiddleware::class => AuthenticationMiddlewareFactory::class,
-            CustomerListPageAction::class => CustomerListPageFactory::class,
-            CustomerCreatePageAction::class => CustomerCreatePageFactory::class,
-            CustomerUpdatePageAction::class => CustomerUpdatePageFactory::class,
-            CustomerDeletePageAction::class => CustomerDeletePageFactory::class,
+            CustomerListPageAction::class => Customer\CustomerListPageFactory::class,
+            CustomerCreatePageAction::class => Customer\CustomerCreatePageFactory::class,
+            CustomerUpdatePageAction::class => Customer\CustomerUpdatePageFactory::class,
+            CustomerDeletePageAction::class => Customer\CustomerDeletePageFactory::class,
             TagListPageAction::class => Tag\TagListPageFactory::class,
             TagCreatePageAction::class => Tag\TagCreatePageFactory::class,
             TagUpdatePageAction::class => Tag\TagUpdatePageFactory::class,
             TagDeletePageAction::class => Tag\TagDeletePageFactory::class,
+            CampaignListPageAction::class => Campaign\CampaignListPageFactory::class,
+            CampaignCreatePageAction::class => Campaign\CampaignCreatePageFactory::class,
+            CampaignUpdatePageAction::class => Campaign\CampaignUpdatePageFactory::class,
+            CampaignDeletePageAction::class => Campaign\CampaignDeletePageFactory::class
         ],
     ],
 
@@ -135,6 +133,40 @@ return [
             'name' => 'tag.delete',
             'path' => '/admin/tag/delete/{id}',
             'middleware' => TagDeletePageAction::class,
+            'allowed_methods' => ['GET','DELETE'],
+            'options' => [
+                'tokens' => [
+                    'id' => '\d+'
+                ]
+            ]
+        ],
+        [
+            'name' => 'campaign.list',
+            'path' => '/admin/campaigns',
+            'middleware' => CampaignListPageAction::class,
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'campaign.create',
+            'path' => '/admin/campaign/create',
+            'middleware' => CampaignCreatePageAction::class,
+            'allowed_methods' => ['GET','POST'],
+        ],
+        [
+            'name' => 'campaign.update',
+            'path' => '/admin/campaign/update/{id}',
+            'middleware' => CampaignUpdatePageAction::class,
+            'allowed_methods' => ['GET','PUT'],
+            'options' => [
+                'tokens' => [
+                    'id' => '\d+'
+                ]
+            ]
+        ],
+        [
+            'name' => 'campaign.delete',
+            'path' => '/admin/campaign/delete/{id}',
+            'middleware' => CampaignDeletePageAction::class,
             'allowed_methods' => ['GET','DELETE'],
             'options' => [
                 'tokens' => [

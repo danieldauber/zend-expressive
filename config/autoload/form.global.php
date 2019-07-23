@@ -2,8 +2,8 @@
 
 use Zend\View;
 use \CodeEmailMKT\Infrastructure;
-use CodeEmailMKT\Application\Form\{CustomerForm, LoginForm, TagForm};
-use CodeEmailMKT\Application\Form\Factory\{CustomerFormFactory, LoginFormFactory, TagFormFactory};
+use CodeEmailMKT\Application\Form\{CampaignForm, CustomerForm, LoginForm, TagForm};
+use CodeEmailMKT\Application\Form\Factory\{CampaignFormFactory, CustomerFormFactory, LoginFormFactory, TagFormFactory};
 
 $forms = [
     'dependencies' => [
@@ -18,7 +18,8 @@ $forms = [
                 Infrastructure\View\HelperPluginManagerFactory::class,
             CustomerForm::class => CustomerFormFactory::class,
             TagForm::class => TagFormFactory::class,
-            LoginForm::class =>LoginFormFactory::class
+            LoginForm::class =>LoginFormFactory::class,
+            CampaignForm::class => CampaignFormFactory::class
 
         ]
     ],

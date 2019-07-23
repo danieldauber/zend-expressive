@@ -1,0 +1,24 @@
+{%  set name  = form.get('name') %}
+{%  set template  = form.get('template') %}
+{%  set tags  = form.get('tags') %}
+
+
+<div class="box-body">
+    {%  set message =  formElementErrors(name,{class: 'help-block'})%}
+    <div class="form-group {{ message ? 'has-error' }}">
+        {{ formLabel(name) }}
+        {{ formElement(name) }}
+        {{ message | raw }}
+    </div>
+    <div class="form-group">
+        {{ formLabel(tags) }}
+        {{ formElement(tags) }}
+    </div>
+    {%  set message =  formElementErrors(template,{class: 'help-block'})%}
+    <div class="form-group {{ message ? 'has-error' }}">
+        {{ formLabel(template) }}
+        {{ formElement(template) }}
+        {{ message | raw }}
+    </div>
+
+</div>

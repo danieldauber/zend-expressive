@@ -1,8 +1,10 @@
 <?php
 
+use CodeEmailMKT\Domain\Persistence\CampaignRepositoryInterface;
 use CodeEmailMKT\Domain\Persistence\TagRepositoryInterface;
 use CodeEmailMKT\Domain\Service\AuthInterface;
 use CodeEmailMKT\Domain\Service\FlashMessageInterface;
+use CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\CampaignRepositoryFactory;
 use CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\TagRepositoryFactory;
 use CodeEmailMKT\Infrastructure\Service\AuthService;
 use CodeEmailMKT\Infrastructure\Service\AuthServiceFactory;
@@ -31,6 +33,7 @@ return [
             Application::class => ApplicationFactory::class,
             Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
             CustomerRepositoryInterface::class => CustomerRepositoryFactory::class,
+            CampaignRepositoryInterface::class => CampaignRepositoryFactory::class,
             TagRepositoryInterface::class => TagRepositoryFactory::class,
             FlashMessageInterface::class => FlashMessageFactory::class,
             'doctrine:fixtures_cmd:load'   => \CodeEdu\FixtureFactory::class,

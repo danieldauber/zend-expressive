@@ -3,6 +3,7 @@
 namespace CodeEmailMKT\Domain\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class Tag
 {
@@ -13,9 +14,12 @@ class Tag
 
     private $customers;
 
+    private $campaigns;
+
     public function __construct()
     {
         $this->customers = new ArrayCollection();
+        $this->campaigns = new ArrayCollection();
     }
 
 
@@ -48,8 +52,16 @@ class Tag
     /**
      * @return ArrayCollection
      */
-    public function getCustomers()
+    public function getCustomers() : Collection
     {
         return $this->customers;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCampaigns() : Collection
+    {
+        return $this->campaigns;
     }
 }
