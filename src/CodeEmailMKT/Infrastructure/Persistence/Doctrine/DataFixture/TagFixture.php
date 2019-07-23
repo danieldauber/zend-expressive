@@ -20,7 +20,7 @@ class TagFixture extends AbstractFixture implements FixtureInterface, OrderedFix
     public function load(ObjectManager $manager)
     {
         $faker = Faker::create();
-        foreach (range(1, 100) as $key => $value) {
+        foreach (range(1, 5) as $key => $value) {
             $tag = new Tag();
             $tag->setName($faker->city);
             $this->addCustomers($tag);
@@ -32,36 +32,18 @@ class TagFixture extends AbstractFixture implements FixtureInterface, OrderedFix
 
     public function addCustomers(Tag $tag)
     {
-        $numCustomers = rand(1, 5);
-        foreach (range(1, $numCustomers) as $value) {
-            $index = rand(0, 99);
-            $customer = $this->getReference("customer-$index");
-
-            if ($tag->getCustomers()->exists(function ($key, $item) use ($customer) {
-                return $customer->getId() == $item->getId();
-            })) {
-                $index = rand(0, 99);
-                $customer = $this->getReference("customer-$index");
-            }
-
+        $indexesCustomers = array_rand(range(0, 4), rand(2, 5));
+        foreach ($indexesCustomers as $value) {
+            $customer = $this->getReference("customer-$value");
             $tag->getCustomers()->add($customer);
         }
     }
 
     public function addCampaigns(Tag $tag)
     {
-        $numCampaigns = rand(1, 5);
-        foreach (range(1, $numCampaigns) as $value) {
-            $index = rand(0, 99);
-            $campaign = $this->getReference("campaign-$index");
-
-            if ($tag->getCampaigns()->exists(function ($key, $item) use ($campaign) {
-                return $campaign->getId() == $item->getId();
-            })) {
-                $index = rand(0, 99);
-                $campaign = $this->getReference("campaign-$index");
-            }
-
+        $indexesCampaigns = array_rand(range(0, 19), rand(2, 5));
+        foreach ($indexesCampaigns as $value) {
+            $campaign = $this->getReference("campaign-$value");
             $tag->getCampaigns()->add($campaign);
         }
     }

@@ -22,13 +22,14 @@ class CampaignFixture extends AbstractFixture implements FixtureInterface, Order
     {
 
         $faker = Faker::create();
+        $template = "<p>{$faker->paragraph(2)}</p><p><a href='#'>Link</a></p>";
 
-        foreach (range(1, 100) as $key => $value) {
+        foreach (range(1, 20) as $key => $value) {
             $campaign = new Campaign();
             $campaign
                 ->setName($faker->country)
                 ->setSubject($faker->sentence(3))
-                ->setTemplate('');
+                ->setTemplate($template);
 
             $manager->persist($campaign);
             $this->addReference("campaign-$key", $campaign);
