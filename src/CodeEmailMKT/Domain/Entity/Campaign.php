@@ -14,6 +14,8 @@ class Campaign
 
     private $template;
 
+    private $subject;
+
     private $tags;
 
     public function __construct()
@@ -92,6 +94,23 @@ class Campaign
             $this->tags->removeElement($tag);
         }
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
+
+    /**
+     * @param mixed $subject
+     */
+    public function setSubject(string $subject)
+    {
+        $this->subject = $subject;
         return $this;
     }
 }

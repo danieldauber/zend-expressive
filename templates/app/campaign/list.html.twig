@@ -24,14 +24,16 @@
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
-                            <th class="col">#</th>
-                            <th>Nome</th>
-                            <th>Ações</th>
+                            <th class="col-md-1">#</th>
+                            <th class="col-md-3">Nome</th>
+                            <th class="col-md-6">Assunto</th>
+                            <th class="col-md-2">Ações</th>
                         </tr>
                         {% for campaign in campaigns %}
                            <tr>
                                <td>{{ campaign.id }}</td>
                                <td>{{ campaign.name }}</td>
+                               <td>{{ campaign.subject | slice(0,10) }}</td>
                                <td>
                                    <a href="{{ url('campaign.update', {id: campaign.id}) }}">Editar</a> |
                                    <a href="{{ url('campaign.delete', {id: campaign.id}) }}">Excluir</a>
